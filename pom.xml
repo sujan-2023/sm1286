@@ -17,10 +17,6 @@
 	<properties>
 		<java.version>17</java.version>
 		<liquibase.version>4.28.0</liquibase.version>
-		<line.coverage>0.95</line.coverage>
-		<branch.coverage>0.95</branch.coverage>
-		<class.coverage>0.95</class.coverage>
-		<method.coverage>0.95</method.coverage>
 	</properties>
 	<dependencies>
 		<dependency>
