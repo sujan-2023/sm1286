@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="create-tool_type-table" author="Sujan Maharjan">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="tool_type"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="tool_type">
+            <column name="id" type="SERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="type_code" type="varchar(15)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="daily_charge" type="decimal(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="weekday_charge" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="weekend_charge" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="holiday_charge" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addUniqueConstraint
+                columnNames="type_code"
+                constraintName="uq_tool_type_type"
+                tableName="tool_type"/>
+
+        <createIndex indexName="idx_tool_type_type_code" tableName="tool_type">
+            <column name="type_code"/>
+        </createIndex>
+
+        <sql>
+        <![CDATA[
+            INSERT INTO tool_type (type_code, daily_charge, weekday_charge, weekend_charge, holiday_charge)
+            VALUES
+                ('Ladder', 1.99, TRUE, TRUE, FALSE),
+                ('Chainsaw', 1.49, TRUE, FALSE, TRUE),
+                ('Jackhammer', 2.99, TRUE, FALSE, FALSE)
+                ON CONFLICT (type_code) DO NOTHING;
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="create-tool-table" author="Sujan Maharjan">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="tool"/>
+            </not>
+        </preConditions>
+        <createTable tableName="tool">
+            <column name="id" type="SERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="code" type="varchar(15)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="varchar(15)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="brand" type="varchar(55)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="active" type="boolean" defaultValueBoolean="true" />
+        </createTable>
+        <addUniqueConstraint
+                columnNames="code"
+                constraintName="uq_tool_code"
+                tableName="tool"/>
+        <createIndex
+                indexName="idx_tool_code"
+                tableName="tool">
+            <column name="code"/>
+        </createIndex>
+        <addForeignKeyConstraint
+                baseTableName="tool"
+                baseColumnNames="type"
+                constraintName="fk_tool_type_code"
+                referencedTableName="tool_type"
+                referencedColumnNames="type_code"
+                onDelete="CASCADE" />
+
+        <sql>
+        <![CDATA[
+            INSERT INTO tool(code, type, brand)
+            VALUES
+                ('CHNS', 'Chainsaw', 'Stihl'),
+                ('LADW', 'Ladder', 'Werner'),
+                ('JAKD', 'Jackhammer', 'DeWalt'),
+                ('JAKR', 'Jackhammer', 'Ridgid')
+                ON CONFLICT (code) DO NOTHING;
+            ]]>
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
