@@ -17,7 +17,7 @@ To start this project, ensure you have the following installed on your system:
 
    ```bash
    git clone https://github.com/sujan-2023/sm1286.git
-
+    ```
 
 2.  **Build the Project**
 
@@ -25,7 +25,7 @@ To start this project, ensure you have the following installed on your system:
    
     ```bash
     ./mvnw clean install
-    
+    ```
 3.  **Set Up and Start Docker**
 
     Use Docker Compose to set up and start the services:
@@ -34,31 +34,41 @@ To start this project, ensure you have the following installed on your system:
 
     ```bash
     docker-compose up
-    
+    ```
 4.  **Build the Project**
 
     Start the Spring Boot application:
     
     ```bash
     ./mvnw spring-boot:run
-    
+    ```
 
 5. **Curl requests**
 
-   Alternative you can import `resource/sm1286.postman_collection.json` to your postman to testing.
+   Alternative you can import `resource/sm1286.postman_collection.json` to your postman for testing and import all available endpoints.
 
+    TEST 1
     ```bash
-   TEST 1
-    curl --location --request POST 'localhost:8080/api/checkout' --header 'Content-Type: application/json' --data-raw '{ "toolCode": "JAKR", "rentalDayCount": 4, "discountPercent": 101, "checkoutDate": "09/03/15" }'
+   curl --location --request POST 'localhost:8080/api/checkout' --header 'Content-Type: application/json' --data-raw '{ "toolCode": "JAKR", "rentalDayCount": 4, "discountPercent": 101, "checkoutDate": "09/03/15" }'
+    ```
     TEST 2
+    ```bash
     curl --location --request POST 'localhost:8080/api/checkout' --header 'Content-Type: application/json' --data-raw '{ "toolCode": "LADW", "rentalDayCount": 3, "discountPercent": 10, "checkoutDate": "07/02/20" }'
-    TEST 3
+   ``` 
+   TEST 3
+    ```bash
     curl --location --request POST 'localhost:8080/api/checkout' --header 'Content-Type: application/json' --data-raw '{ "toolCode": "CHNS", "rentalDayCount": 5, "discountPercent": 25, "checkoutDate": "07/02/15" }'
-    TEST 4
+   ``` 
+   TEST 4
+    ```bash
     curl --location --request POST 'localhost:8080/api/checkout' --header 'Content-Type: application/json' --data-raw '{ "toolCode": "JAKD", "rentalDayCount": 6, "discountPercent": 0, "checkoutDate": "09/03/15" }'
+    ```
     TEST 5
+   ```bash
     curl --location --request POST 'localhost:8080/api/checkout' --header 'Content-Type: application/json' --data-raw '{ "toolCode": "JAKR", "rentalDayCount": 9, "discountPercent": 0, "checkoutDate": "07/02/15" }'
-    TEST 6
+   ``` 
+   TEST 6
+    ```bash
     curl --location --request POST 'localhost:8080/api/checkout' --header 'Content-Type: application/json' --data-raw '{ "toolCode": "JAKR", "rentalDayCount": 4, "discountPercent": 50, "checkoutDate": "07/02/20" }'
-
+    ```
     
