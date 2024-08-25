@@ -17,26 +17,24 @@ To start this project, ensure you have the following installed on your system:
 
    ```bash
    git clone https://github.com/sujan-2023/sm1286.git
-   
+
 
 2.  **Build the Project**
 
-   Use Maven to build the project:
-
-   ```bash
-   ./mvnw clean install
+    Use Maven to build the project:
    
-
+    ```bash
+    ./mvnw clean install
+    
 3.  **Set Up and Start Docker**
 
     Use Docker Compose to set up and start the services:
 
     Ensure docker-compose.yml is correctly configured for your project. If you don't have Docker Compose installed, follow the installation instructions for docker.
-    
+
     ```bash
     docker-compose up
     
-
 4.  **Build the Project**
 
     Start the Spring Boot application:
@@ -44,13 +42,13 @@ To start this project, ensure you have the following installed on your system:
     ```bash
     ./mvnw spring-boot:run
     
-    
-5.  **Curl requests**
 
-    Alternative you can import `resource/sm1286.postman_collection.json` to your postman to testing.
+5. **Curl requests**
+
+   Alternative you can import `resource/sm1286.postman_collection.json` to your postman to testing.
 
     ```bash
-    TEST 1
+   TEST 1
     curl --location --request POST 'localhost:8080/api/checkout' --header 'Content-Type: application/json' --data-raw '{ "toolCode": "JAKR", "rentalDayCount": 4, "discountPercent": 101, "checkoutDate": "09/03/15" }'
     TEST 2
     curl --location --request POST 'localhost:8080/api/checkout' --header 'Content-Type: application/json' --data-raw '{ "toolCode": "LADW", "rentalDayCount": 3, "discountPercent": 10, "checkoutDate": "07/02/20" }'
@@ -62,3 +60,5 @@ To start this project, ensure you have the following installed on your system:
     curl --location --request POST 'localhost:8080/api/checkout' --header 'Content-Type: application/json' --data-raw '{ "toolCode": "JAKR", "rentalDayCount": 9, "discountPercent": 0, "checkoutDate": "07/02/15" }'
     TEST 6
     curl --location --request POST 'localhost:8080/api/checkout' --header 'Content-Type: application/json' --data-raw '{ "toolCode": "JAKR", "rentalDayCount": 4, "discountPercent": 50, "checkoutDate": "07/02/20" }'
+
+    
